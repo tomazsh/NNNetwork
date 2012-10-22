@@ -1,0 +1,6 @@
+[submodule "Vendor/AFNetworking"]
+	path = Vendor/AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
+[submodule "Vendor/SSKeychain"]
+	path = Vendor/SSKeychain
+	url = https://github.com/soffes/sskeychain.git
