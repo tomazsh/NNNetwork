@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>NNInstapaperActivity Class Reference</title>
+		<title>NNReadLaterActivityDelegate Protocol Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">NNInstapaperActivity Class Reference</h1>
+				<h1 class="hideInXcode">NNReadLaterActivityDelegate Protocol Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -26,8 +26,6 @@
 				<li id="jumpto_button" role="navigation">
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
-	
-	<option value="overview">Overview</option>
 	
 	
 	
@@ -38,13 +36,13 @@
 	
 	
 	
-	<option value="properties">Properties</option>
-	
-	<option value="//api/name/client">&nbsp;&nbsp;&nbsp;&nbsp;client</option>
 	
 	
 	
 	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/readLaterActivityNeedsCredential:">&nbsp;&nbsp;&nbsp;&nbsp;- readLaterActivityNeedsCredential:</option>
 	
 	
 	
@@ -55,37 +53,33 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
-<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
-
 
 
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Accessing Instapaper Activity Properties">Accessing Instapaper Activity Properties</a></span></li>
-	
 </ul></li>
 
 
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/client">client</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/readLaterActivityNeedsCredential:">readLaterActivityNeedsCredential:</a></span></li>
 	
 </ul></li>
-
-
-
-
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="NNInstapaperActivity Class Reference" name="top"></a>
+				<a title="NNReadLaterActivityDelegate Protocol Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -94,43 +88,21 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">NNInstapaperActivity Class Reference</h1>
+						<h1 class="title title-header">NNReadLaterActivityDelegate Protocol Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
-	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/NNReadLaterActivity.html">NNReadLaterActivity</a> : UIActivity</td>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">NNInstapaperActivity.h</td>
+	<td class="specification-value">NNReadLaterActivity.h</td>
 </tr>
 						</tbody></table></div>
 					
-					
-					
-					
-					<div class="section section-overview">
-						<a title="Overview" name="overview"></a>
-						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <code>NNInstapaperActivity</code> class provides a way to display an activity for sending a set of URLs to Instapaper. It uses the <code>sharedClient</code> from <a href="../Classes/NNInstapaperClient.html"><code>NNInstapaperClient</code></a> class as the base <a href="#//api/name/client">client</a>.</p>
-
-<p>By default, <code>NNInstapaperActivity</code> objects display a name, returned by <a href="../Classes/NNInstapaperClient.html"><code>NNInstapaperClient</code></a>, and an image named <code>NNInstapaperActivity</code>.</p>
-
-<h2>Subclassing Notes</h2>
-
-<p>This class should almost never be subclassed. The only reason for subclassing <code>NNInstapaperActivity</code> is to provide a custom <a href="#//api/name/client">client</a>, image or name for the activity.</p>
-
-<h3>Methods to Override</h3>
-
-<p>You should override the <a href="#//api/name/client"><code>client</code></a> property if you want to use a different <a href="#//api/name/client">client</a> than the <code>sharedClient</code> returned by <a href="../Classes/NNInstapaperClient.html"><code>NNInstapaperClient</code></a>.</p>
-
-<p>You should override <code>activityName</code> if you want to display a custom name in the <code>UIActivityViewController</code> instance.</p>
-
-<p>You should override <code>activityImage</code> if you want to display a custom image in the <code>UIActivityViewController</code> instance.</p>
-					</div>
 					
 					
 					
@@ -141,16 +113,16 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Accessing Instapaper Activity Properties" name="task_Accessing Instapaper Activity Properties"></a>
 						
-<h3 class="subsubtitle task-title">Accessing Instapaper Activity Properties</h3>
+						
+
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/client">&nbsp;&nbsp;client</a></code>
-		<span class="tooltip"><p>Instapaper client to display activity for.</p></span>
+		<code><a href="#//api/name/readLaterActivityNeedsCredential:">&ndash;&nbsp;readLaterActivityNeedsCredential:</a></code>
+		<span class="tooltip"><p>If you do not implement this method in your delegate, activity will not be shown in activity view controller.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
+	
 	
 </li>
 						</ul>
@@ -161,23 +133,27 @@
 					
 					
 					
+					
+					
+					
+					
 					<div class="section section-methods">
-						<a title="Properties" name="properties"></a>
-						<h2 class="subtitle subtitle-methods">Properties</h2>
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/client" title="client"></a>
-	<h3 class="subsubtitle method-title">client</h3>
+	<a name="//api/name/readLaterActivityNeedsCredential:" title="readLaterActivityNeedsCredential:"></a>
+	<h3 class="subsubtitle method-title">readLaterActivityNeedsCredential:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Instapaper client to display activity for.</p>
+		<p>If you do not implement this method in your delegate, activity will not be shown in activity view controller.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (strong, readonly, nonatomic) NNInstapaperClient *client</code></div>
+	<div class="method-subsection method-declaration"><code>- (void)readLaterActivityNeedsCredential:(NNReadLaterActivity *)<em>activity</em></code></div>
 
     
 	
@@ -195,17 +171,13 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">NNInstapaperActivity.h</code><br />
+		<code class="declared-in-ref">NNReadLaterActivity.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 					</div>
-					
-					
-					
-					
 					
 					
 				</div>

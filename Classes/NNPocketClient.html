@@ -38,11 +38,6 @@
 	
 	
 	
-	<option value="properties">Properties</option>
-	
-	<option value="//api/name/APIKey">&nbsp;&nbsp;&nbsp;&nbsp;APIKey</option>
-	
-	
 	
 	
 	
@@ -50,6 +45,8 @@
 	<option value="instance_methods">Instance Methods</option>
 	
 	<option value="//api/name/addURL:title:withCredential:success:failure:">&nbsp;&nbsp;&nbsp;&nbsp;- addURL:title:withCredential:success:failure:</option>
+	
+	<option value="//api/name/authorizeWithSuccess:failure:">&nbsp;&nbsp;&nbsp;&nbsp;- authorizeWithSuccess:failure:</option>
 	
 	
 	
@@ -67,7 +64,7 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Accessing Pocket Client Properties">Accessing Pocket Client Properties</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Authorizing Users">Authorizing Users</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Interacting with Pocket Service">Interacting with Pocket Service</a></span></li>
 	
@@ -77,12 +74,6 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/APIKey">APIKey</a></span></li>
-	
-</ul></li>
-
 
 
 
@@ -90,6 +81,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addURL:title:withCredential:success:failure:">addURL:title:withCredential:success:failure:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/authorizeWithSuccess:failure:">authorizeWithSuccess:failure:</a></span></li>
 	
 </ul></li>
 
@@ -115,7 +108,7 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/NNOAuth1Client.html">NNOAuth1Client</a> : <a href="../Classes/NNOAuthClient.html">NNOAuthClient</a> : AFHTTPClient</td>
+	<td class="specification-value"><a href="../Classes/NNOAuth2Client.html">NNOAuth2Client</a> : <a href="../Classes/NNOAuthClient.html">NNOAuthClient</a> : AFHTTPClient</td>
 </tr><tr>
 	<td class="specification-title">Conforms to</td>
 	<td class="specification-value"><a href="../Protocols/NNReadLaterClient.html">NNReadLaterClient</a></td>
@@ -143,16 +136,16 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Accessing Pocket Client Properties" name="task_Accessing Pocket Client Properties"></a>
-						<h3 class="subsubtitle task-title">Accessing Pocket Client Properties</h3>
+						<a title="Authorizing Users" name="task_Authorizing Users"></a>
+						<h3 class="subsubtitle task-title">Authorizing Users</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/APIKey">&nbsp;&nbsp;APIKey</a></code>
-		<span class="tooltip"><p>API key for the service.</p></span>
+		<code><a href="#//api/name/authorizeWithSuccess:failure:">&ndash;&nbsp;authorizeWithSuccess:failure:</a></code>
+		<span class="tooltip"><p>Creates an <code>AFHTTPRequestOperation</code> with a <code>POST</code> request, and enqueues it to the OAuth client’s operation queue. On completion it parses the response and passes a temporary credential to the <code>success</code> block parameter. For client to be able to parse the response successfully, <code>path</code> should be a valid temporary credential endpoint. To learn more about this, see <a href="http://tools.ietf.org/html/rfc5849">The OAuth 1.0 Protocol</a>.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
+	
 	
 </li>
 						</ul>
@@ -177,48 +170,6 @@
 					
 					
 					
-					
-					<div class="section section-methods">
-						<a title="Properties" name="properties"></a>
-						<h2 class="subtitle subtitle-methods">Properties</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/APIKey" title="APIKey"></a>
-	<h3 class="subsubtitle method-title">APIKey</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>API key for the service.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (copy, nonatomic) NSString *APIKey</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">NNPocketClient.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
 					
 					
 					
@@ -294,6 +245,62 @@
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/authorizeWithSuccess:failure:" title="authorizeWithSuccess:failure:"></a>
+	<h3 class="subsubtitle method-title">authorizeWithSuccess:failure:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates an <code>AFHTTPRequestOperation</code> with a <code>POST</code> request, and enqueues it to the OAuth client’s operation queue. On completion it parses the response and passes a temporary credential to the <code>success</code> block parameter. For client to be able to parse the response successfully, <code>path</code> should be a valid temporary credential endpoint. To learn more about this, see <a href="http://tools.ietf.org/html/rfc5849">The OAuth 1.0 Protocol</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)authorizeWithSuccess:(void ( ^ ) ( AFHTTPRequestOperation *operation , NSString *username , NNOAuth2Credential *credential ))<em>success</em> failure:(void ( ^ ) ( AFHTTPRequestOperation *operation , NSError *error ))<em>failure</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>success</em></dt>
+			<dd><p>A block object to be executed when the request operation finishes parsing a temporary credential successfully. This block has no return value and takes two arguments: the created request operation and the temporary credential created from the response data of request.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>failure</em></dt>
+			<dd><p>A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes two arguments: the created request operation and the <code>NSError</code> object describing the network or parsing error that occurred.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>path</em></dt>
+			<dd><p>The path to be appended to the HTTP client&rsquo;s base URL and used as the request URL. This path should be a valid temporary credential endpoint.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NNPocketClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -307,7 +314,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Tomaz Nedeljko. All rights reserved. (Last updated: 2012-10-22)</span><br />
+						<p><span class="copyright">&copy; 2012 Tomaz Nedeljko. All rights reserved. (Last updated: 2012-12-14)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
