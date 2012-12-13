@@ -1,5 +1,5 @@
 //
-//  NNPocketActivity.m
+//  NNOAuth2Credential.h
 //  NNNetwork
 //
 //  Copyright (c) 2012 Tomaz Nedeljko (http://nedeljko.com)
@@ -23,26 +23,20 @@
 //  THE SOFTWARE.
 //
 
-#import "NNPocketActivity.h"
+#import "NNOAuthCredential.h"
 
-NSString * const NNActivityTypeSendToPocket = @"NNActivityTypeSendToPocket";
-
-@implementation NNPocketActivity
-
-#pragma mark -
-#pragma mark Properties
-
-- (NNPocketClient *)client
-{
-    return [NNPocketClient sharedClient];
+@interface NNOAuth2Credential : NNOAuthCredential {
+    @private
+    NSString *_tokenType;
 }
 
-#pragma mark -
-#pragma mark UIActivity
+///------------------------------------------------
+/// @name Accessing OAuth 2.0 Credential Properties
+///------------------------------------------------
 
-- (NSString *)activityType
-{
-    return NNActivityTypeSendToPocket;
-}
+/**
+ Token type for the credential.
+ */
+@property(copy, nonatomic) NSString *tokenType;
 
 @end

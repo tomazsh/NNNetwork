@@ -23,8 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#ifdef _AFNETWORKING_
-
 #import "NNOAuth1Client.h"
 #import "NNReadLaterClient.h"
 
@@ -34,6 +32,3 @@
 @interface NNReadabilityClient : NNOAuth1Client <NNReadLaterClient>
 
 @end
-
-
-#endif

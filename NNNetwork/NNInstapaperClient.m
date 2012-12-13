@@ -24,9 +24,6 @@
 //
 
 #import "NNInstapaperClient.h"
-
-#ifdef _AFNETWORKING_
-
 #import "NNOAuthCredential.h"
 
 NSString * const NNInstapaperClientName = @"Instapaper";
@@ -86,4 +83,3 @@ NSString * const NNInstapaperClientAddBookmarkPath = @"bookmarks/add";
 
 @end
 
-#endif

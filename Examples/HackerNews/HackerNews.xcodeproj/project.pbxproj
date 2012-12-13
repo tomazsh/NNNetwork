@@ -13,6 +13,9 @@
 		732EF603162D670600F766E3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 732EF602162D670600F766E3 /* Default.png */; };
 		732EF605162D670600F766E3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 732EF604162D670600F766E3 /* Default@2x.png */; };
 		732EF607162D670600F766E3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 732EF606162D670600F766E3 /* Default-568h@2x.png */; };
+		735E6419167A991300CA10BD /* NNOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 735E6418167A991300CA10BD /* NNOAuth2Client.m */; };
+		735E6423167A997300CA10BD /* NNOAuth1Credential.m in Sources */ = {isa = PBXBuildFile; fileRef = 735E641C167A991F00CA10BD /* NNOAuth1Credential.m */; };
+		735E6425167A997600CA10BD /* NNOAuth2Credential.m in Sources */ = {isa = PBXBuildFile; fileRef = 735E641E167A991F00CA10BD /* NNOAuth2Credential.m */; };
 		735F7384162F210200AEFFBF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735F7383162F210200AEFFBF /* MobileCoreServices.framework */; };
 		735F7386162F210B00AEFFBF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735F7385162F210B00AEFFBF /* SystemConfiguration.framework */; };
 		735F7388162F252100AEFFBF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735F7387162F252100AEFFBF /* Security.framework */; };
@@ -72,6 +75,12 @@
 		732EF604162D670600F766E3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
 		732EF606162D670600F766E3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
 		732EF631162D684F00F766E3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = Resources/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		735E6417167A991300CA10BD /* NNOAuth2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNOAuth2Client.h; path = ../../NNNetwork/NNOAuth2Client.h; sourceTree = "<group>"; };
+		735E6418167A991300CA10BD /* NNOAuth2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNOAuth2Client.m; path = ../../NNNetwork/NNOAuth2Client.m; sourceTree = "<group>"; };
+		735E641B167A991F00CA10BD /* NNOAuth1Credential.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NNOAuth1Credential.h; path = ../../NNNetwork/NNOAuth1Credential.h; sourceTree = "<group>"; };
+		735E641C167A991F00CA10BD /* NNOAuth1Credential.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NNOAuth1Credential.m; path = ../../NNNetwork/NNOAuth1Credential.m; sourceTree = "<group>"; };
+		735E641D167A991F00CA10BD /* NNOAuth2Credential.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NNOAuth2Credential.h; path = ../../NNNetwork/NNOAuth2Credential.h; sourceTree = "<group>"; };
+		735E641E167A991F00CA10BD /* NNOAuth2Credential.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NNOAuth2Credential.m; path = ../../NNNetwork/NNOAuth2Credential.m; sourceTree = "<group>"; };
 		735F7383162F210200AEFFBF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		735F7385162F210B00AEFFBF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		735F7387162F252100AEFFBF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -304,10 +313,16 @@
 				73BB6BBB163551F00008536B /* NNOAuth.m */,
 				73BB6B8116354A8D0008536B /* NNOAuth1Client.h */,
 				73BB6B8216354A8D0008536B /* NNOAuth1Client.m */,
+				735E6417167A991300CA10BD /* NNOAuth2Client.h */,
+				735E6418167A991300CA10BD /* NNOAuth2Client.m */,
 				73BB6B8516354A8D0008536B /* NNOAuthClient.h */,
 				73BB6B8616354A8D0008536B /* NNOAuthClient.m */,
 				73BB6B8716354A8D0008536B /* NNOAuthCredential.h */,
 				73BB6B8816354A8D0008536B /* NNOAuthCredential.m */,
+				735E641B167A991F00CA10BD /* NNOAuth1Credential.h */,
+				735E641C167A991F00CA10BD /* NNOAuth1Credential.m */,
+				735E641D167A991F00CA10BD /* NNOAuth2Credential.h */,
+				735E641E167A991F00CA10BD /* NNOAuth2Credential.m */,
 				73BB6B8916354A8D0008536B /* NNPocketActivity.h */,
 				73BB6B8A16354A8D0008536B /* NNPocketActivity.m */,
 				73BB6B8B16354A8D0008536B /* NNPocketClient.h */,
@@ -461,6 +476,9 @@
 				73BB6C7D1635EE950008536B /* AFURLConnectionOperation.m in Sources */,
 				73BB6C7E1635EE950008536B /* AFXMLRequestOperation.m in Sources */,
 				73BB6C7F1635EE950008536B /* UIImageView+AFNetworking.m in Sources */,
+				735E6419167A991300CA10BD /* NNOAuth2Client.m in Sources */,
+				735E6423167A997300CA10BD /* NNOAuth1Credential.m in Sources */,
+				735E6425167A997600CA10BD /* NNOAuth2Credential.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,7 +538,6 @@
 		732EF60B162D670600F766E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HackerNews/HackerNews-Prefix.pch";
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";
 				OTHER_LDFLAGS = (
@@ -535,7 +552,6 @@
 		732EF60C162D670600F766E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HackerNews/HackerNews-Prefix.pch";
 				INFOPLIST_FILE = "HackerNews/HackerNews-Info.plist";
 				OTHER_LDFLAGS = (

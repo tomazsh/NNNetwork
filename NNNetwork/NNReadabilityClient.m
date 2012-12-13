@@ -24,9 +24,6 @@
 //
 
 #import "NNReadabilityClient.h"
-
-#ifdef _AFNETWORKING_
-
 #import "NNOAuthCredential.h"
 
 NSString * const NNReadabilityClientName = @"Readability";
@@ -70,5 +67,3 @@ NSString * const NNReadabilityClientAddURLPath = @"bookmarks";
 }
 
 @end
-
-#endif

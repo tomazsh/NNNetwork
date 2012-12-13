@@ -23,24 +23,33 @@
 //  THE SOFTWARE.
 //
 
-#ifdef _AFNETWORKING_
-
-#import "NNOAuth1Client.h"
+#import "NNOAuth2Client.h"
 #import "NNReadLaterClient.h"
+
+@class NNOAuth2Credential;
 
 /**
  `NNPocketClient` class provides a way of interacting with [Pocket](http://getpocket.com). It defines methods to access the shared client instance and to add URLs to a reading list. This class fully conforms to `NNReadLaterClient` protocol.
  */
-@interface NNPocketClient : NNOAuth1Client <NNReadLaterClient>
+@interface NNPocketClient : NNOAuth2Client <NNReadLaterClient>
 
-///-----------------------------------------
-/// @name Accessing Pocket Client Properties
-///-----------------------------------------
+@property(copy, nonatomic) NSString *scheme;
+
+///------------------------
+/// @name Authorizing Users
+///------------------------
 
 /**
- API key for the service.
+ Creates an `AFHTTPRequestOperation` with a `POST` request, and enqueues it to the OAuth client’s operation queue. On completion it parses the response and passes a temporary credential to the `success` block parameter. For client to be able to parse the response successfully, `path` should be a valid temporary credential endpoint. To learn more about this, see [The OAuth 1.0 Protocol](http://tools.ietf.org/html/rfc5849).
+ 
+ @param path The path to be appended to the HTTP client's base URL and used as the request URL. This path should be a valid temporary credential endpoint.
+ @param success A block object to be executed when the request operation finishes parsing a temporary credential successfully. This block has no return value and takes two arguments: the created request operation and the temporary credential created from the response data of request.
+ @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes two arguments: the created request operation and the `NSError` object describing the network or parsing error that occurred.
  */
-@property(copy, nonatomic) NSString *APIKey;
+- (void)authorizeWithSuccess:(void (^)(AFHTTPRequestOperation *operation, NSString *username, NNOAuth2Credential *credential))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (BOOL)handleRedirectionURL:(NSURL *)redirectionURL;
 
 ///--------------------------------------
 /// @name Interacting with Pocket Service
@@ -60,5 +69,3 @@
        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end
-
-#endif

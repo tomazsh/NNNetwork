@@ -76,7 +76,13 @@
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Unlink", nil), NSLocalizedString(@"Unlink and Add New", nil), nil];
         [actionSheet showInView:self.view];
     } else {
-        [self performSegueWithIdentifier:@"AddAccountSegue" sender:self];
+        if ([client isKindOfClass:[NNPocketClient class]]) {
+            [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+            NNPocketClient *pocketClient = (NNPocketClient *)client;
+            [self loginWithPocketClient:pocketClient];
+        } else {
+            [self performSegueWithIdentifier:@"AddAccountSegue" sender:self];
+        }
     }
 }
 
@@ -101,20 +107,44 @@
     } else if (buttonIndex == 1) {
         [credential removeFromKeychainForService:[[NSBundle mainBundle] bundleIdentifier] account:client.name];
         cell.detailTextLabel.text = nil;
-        [self performSegueWithIdentifier:@"AddAccountSegue" sender:self];
+        
+        if ([client isKindOfClass:[NNPocketClient class]]) {
+            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
+            NNPocketClient *pocketClient = (NNPocketClient *)client;
+            [self loginWithPocketClient:pocketClient];
+        } else {
+            [self performSegueWithIdentifier:@"AddAccountSegue" sender:self];
+        }
     } else {
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
     }
 }
 
+- (void)loginWithPocketClient:(NNPocketClient *)client
+{
+    [client authorizeWithSuccess:^(AFHTTPRequestOperation *operation, NSString *username, NNOAuth2Credential *credential) {
+        NNOAuth2Credential *newCredential = [NNOAuth2Credential credentialWithAccessToken:credential.accessToken userInfo:@{ @"AccountName" : username }];
+        [newCredential saveToKeychainForService:[[NSBundle mainBundle] bundleIdentifier] account:client.name];
+        [self.tableView reloadData];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error Logging In", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+        [alertView show];
+    }];
+}
+
 #pragma mark -
 #pragma mark AddAccountViewControllerDelegate
 
-- (void)addAccountViewController:(AddAccountViewController *)controller didObtainCredential:(NNOAuthCredential *)credential
+- (void)addAccountViewController:(AddAccountViewController *)controller didObtainCredential:(NNOAuth1Credential *)credential
 {
-    NNOAuthCredential *newCredential = [NNOAuthCredential credentialWithAccessToken:credential.accessToken accessSecret:credential.accessSecret userInfo:@{ @"AccountName" : controller.usernameField.text }];
+    NNOAuth1Credential *newCredential = [NNOAuth1Credential credentialWithAccessToken:credential.accessToken accessSecret:credential.accessSecret userInfo:@{ @"AccountName" : controller.usernameField.text }];
     [newCredential saveToKeychainForService:[[NSBundle mainBundle] bundleIdentifier] account:controller.client.name];
     [self.tableView reloadData];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)addAccountViewControllerDidCancel:(AddAccountViewController *)controller
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

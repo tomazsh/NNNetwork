@@ -23,10 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#import <Availability.h>
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
-
 #import "NNReadLaterActivity.h"
 #import "NNPocketClient.h"
 
@@ -61,5 +57,3 @@ extern NSString * const NNActivityTypeSendToPocket;
 @property(strong, readonly, nonatomic) NNPocketClient *client;
 
 @end
-
-#endif

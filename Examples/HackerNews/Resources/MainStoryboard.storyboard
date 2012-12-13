@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ydP-hs-hLa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ydP-hs-hLa">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -75,7 +75,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgN-g6-0Et" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1264" y="22"/>
+            <point key="canvasLocation" x="776" y="-702"/>
         </scene>
         <!--Add Account View Controller - Read Later-->
         <scene sceneID="1Gr-9u-ksA">
@@ -85,10 +85,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" id="mJX-zr-YqG">
-                            <rect key="frame" x="0.0" y="176" width="320" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <sections>
                             <tableViewSection id="BR1-Uw-6rI">
                                 <cells>
@@ -170,21 +166,61 @@
                             </tableViewSection>
                             <tableViewSection id="SIB-S9-Axo">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="iDx-6Q-VBE" style="IBUITableViewCellStyleDefault" id="NZD-fi-HEI">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="NZD-fi-HEI">
                                         <rect key="frame" x="0.0" y="120" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDx-6Q-VBE">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzm-tJ-dgs">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="146" id="7B4-m8-mBb"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" red="0.21960784310000001" green="0.3294117647" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
+                                                    <state key="normal" title="Cancel">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="cancel:" destination="pTQ-cS-zVK" eventType="touchUpInside" id="Nzm-zH-jgf"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbA-uB-yN5">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="146" id="ozp-8r-akn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Login">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" red="0.70422894021739135" green="0.70422894021739135" blue="0.70422894021739135" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="login:" destination="pTQ-cS-zVK" eventType="touchUpInside" id="m4f-Uw-NIg"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="Qzm-tJ-dgs" firstAttribute="top" secondItem="NZD-fi-HEI" secondAttribute="top" constant="1" id="VFM-h7-R8a"/>
+                                            <constraint firstItem="Qzm-tJ-dgs" firstAttribute="leading" secondItem="NZD-fi-HEI" secondAttribute="leading" constant="10" id="XEI-hf-ju1"/>
+                                            <constraint firstItem="LbA-uB-yN5" firstAttribute="baseline" secondItem="Qzm-tJ-dgs" secondAttribute="baseline" type="default" id="xdM-dW-nOU"/>
+                                            <constraint firstItem="LbA-uB-yN5" firstAttribute="leading" secondItem="Qzm-tJ-dgs" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="y0B-Ny-Tgb"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="backgroundView" destination="z4m-f4-h7l" id="HFn-mu-akj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -192,14 +228,36 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Read Later" id="6Uk-NU-GKB"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="mJX-zr-YqG" id="IIn-g2-F9g"/>
+                        <outlet property="cancelButton" destination="Qzm-tJ-dgs" id="ZMw-zh-NyX"/>
+                        <outlet property="loginButton" destination="LbA-uB-yN5" id="SG9-Qg-wPM"/>
                         <outlet property="passwordField" destination="YSk-2b-rKr" id="cge-9k-Ll2"/>
                         <outlet property="usernameField" destination="37O-7J-Y1r" id="bGI-rg-a1Y"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FLb-b3-rkw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="z4m-f4-h7l">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="1680" y="22"/>
+            <point key="canvasLocation" x="1192" y="-702"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Rbk-ZK-k3q">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="WKV-2l-ZdC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="EQW-pr-eaA"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WUo-EV-W09">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="pTQ-cS-zVK" kind="relationship" relationship="rootViewController" id="caL-qL-ZAV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bd0-Mk-86A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1192" y="22"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="17q-Mh-wcm">
@@ -214,7 +272,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cX0-ml-H00" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="852" y="22"/>
+            <point key="canvasLocation" x="364" y="-702"/>
         </scene>
         <!--News View Controller - Hacker News-->
         <scene sceneID="Ser-bp-jeo">
@@ -280,6 +338,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="WKV-2l-ZdC" kind="modal" identifier="AddAccountSegue" id="0eE-mz-VJI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dmm-hg-wBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -296,9 +357,12 @@
         <class className="AddAccountViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddAccountViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancel:"/>
                 <relationship kind="action" name="login:"/>
                 <relationship kind="action" name="textDidChange:" candidateClass="NSNotification"/>
                 <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
             </relationships>
@@ -326,4 +390,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="caL-qL-ZAV"/>
+    </inferredMetricsTieBreakers>
 </document>

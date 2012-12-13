@@ -39,7 +39,6 @@
 @interface NNOAuthCredential : NSObject <NSCoding, NSCopying> {
     @private
     NSString *_accessToken;
-    NSString *_accessSecret;
     NSString *_refreshToken;
     NSDate *_expirationDate;
     NSDictionary *_userInfo; // Objects and keys in dictionary should be NSCoding conformant.
@@ -53,43 +52,39 @@
  Initializes a newly allocated credential with provided access token and access secret.
  
  @param token Credential access token, obtained from an OAuth service. May not be `nil`.
- @param secret Credential access secret, obtained from an OAuth service. May not be `nil`.
  
  @return An initialized `NNOAuthCredential` object.
  */
-- (id)initWithAccessToken:(NSString *)token accessSecret:(NSString *)secret;
+- (id)initWithAccessToken:(NSString *)token;
 
 /**
  Initializes a newly allocated credential with provided access token, access secret and user information.
  
  @param token Credential access token, obtained from an OAuth service. May not be `nil`.
- @param secret Credential access secret, obtained from an OAuth service. May not be `nil`.
  @param userInfo The user information dictionary for the newly allocated credential. Keys and object in this dictionary should be `NSCoding` conformant. May be `nil`.
  
  @return An initialized `NNOAuthCredential` object.
  */
-- (id)initWithAccessToken:(NSString *)token accessSecret:(NSString *)secret userInfo:(NSDictionary *)userInfo;
+- (id)initWithAccessToken:(NSString *)token userInfo:(NSDictionary *)userInfo;
 
 /**
  Creates and returns a new credential with provided access token and access secret.
  
  @param token Credential access token, obtained from an OAuth service. May not be `nil`.
- @param secret Credential access secret, obtained from an OAuth service. May not be `nil`.
  
  @return A new `NNOAuthCredential` object.
  */
-+ (id)credentialWithAccessToken:(NSString *)token accessSecret:(NSString *)secret;
++ (id)credentialWithAccessToken:(NSString *)token;
 
 /**
  Creates and returns a new credential with provided access token, access secret and user information.
  
  @param token Credential access token, obtained from an OAuth service. May not be `nil`.
- @param secret Credential access secret, obtained from an OAuth service. May not be `nil`.
  @param userInfo The user information dictionary for the new credential. May be `nil`.
  
  @return A new `NNOAuthCredential` object.
  */
-+ (id)credentialWithAccessToken:(NSString *)token accessSecret:(NSString *)secret userInfo:(NSDictionary *)userInfo;
++ (id)credentialWithAccessToken:(NSString *)token userInfo:(NSDictionary *)userInfo;
 
 /**
  Creates and returns a new credential that has `accessToken` and `accessSecret` set to empty string. 
@@ -108,13 +103,6 @@
  @discussion If you plan to use a credential with a `NNOAuthClient` instance, this value should not be nil. If you do not have an access token, you should set it to an empty string.
  */
 @property(copy, readonly, nonatomic) NSString *accessToken;
-
-/**
- Access secret for credential.
- 
-  @discussion If you plan to use a credential with a `NNOAuthClient` instance, this value should not be nil. If you do not have an access secret, you should set it to an empty string.
- */
-@property(copy, readonly, nonatomic) NSString *accessSecret;
 
 /**
  Refresh token for credential.

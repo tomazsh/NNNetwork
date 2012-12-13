@@ -12,6 +12,7 @@
 @protocol AddAccountViewControllerDelegate <NSObject>
 
 - (void)addAccountViewController:(AddAccountViewController *)controller didObtainCredential:(NNOAuthCredential *)credential;
+- (void)addAccountViewControllerDidCancel:(AddAccountViewController *)controller;
 
 @end
 
@@ -22,9 +23,12 @@
 @property(nonatomic) BOOL loggingIn;
 @property(strong, readonly, nonatomic) IBOutlet UITextField *usernameField;
 @property(strong, readonly, nonatomic) IBOutlet UITextField *passwordField;
+@property(strong, readonly, nonatomic) IBOutlet UIButton *loginButton;
+@property(strong, readonly, nonatomic) IBOutlet UIButton *cancelButton;
 @property(strong, readonly, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)login:(id)sender;
+- (IBAction)cancel:(id)sender;
 - (IBAction)textDidChange:(NSNotification *)notification;
 
 @end

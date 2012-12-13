@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AccountsViewController.h"
+#import "AddAccountViewController.h"
 
-@interface NewsViewController : UITableViewController <AccountsViewControllerDelegate>
+@interface NewsViewController : UITableViewController <AccountsViewControllerDelegate, AddAccountViewControllerDelegate, NNReadLaterActivityDelegate>
 
 @property(strong, readonly, nonatomic) NSArray *newsItems;
 @property(strong, readonly, nonatomic) NSOperationQueue *operationQueue;

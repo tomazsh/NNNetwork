@@ -23,8 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#ifdef _AFNETWORKING_
-
 #import "AFHTTPClient.h"
 #import "NNOAuth.h"
 
@@ -219,5 +217,3 @@
 - (NSURL *)URLWithPath:(NSString *)path;
 
 @end
-
-#endif

@@ -17,15 +17,26 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = self.client.name;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self.usernameField];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self.passwordField];
+
 }
 
-- (void)viewDidUnload
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidUnload];
-    
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self.usernameField];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextFieldTextDidChangeNotification object:self.passwordField];
+    [self textDidChange:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.usernameField becomeFirstResponder];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.usernameField];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.passwordField];
 }
@@ -65,38 +76,19 @@
     }];
 }
 
+- (IBAction)cancel:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(addAccountViewControllerDidCancel:)]) {
+        [self.delegate addAccountViewControllerDidCancel:self];
+    }
+}
+
 - (IBAction)textDidChange:(NSNotification *)notification
 {
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
     if ([self.usernameField.text length] && [self.passwordField.text length]) {
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.textLabel.enabled = YES;
+        self.loginButton.enabled = YES;
     } else {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.enabled = NO;
-    }
-}
-
-#pragma mark -
-#pragma mark UITableViewDataSource
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    if (indexPath.section == 1) {
-        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Login with %@", nil), self.client.name];
-    }
-    return cell;
-}
-
-#pragma mark -
-#pragma mark UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.section == 1 && [self.usernameField.text length] && [self.passwordField.text length]) {
-        [self login:self];
+        self.loginButton.enabled = NO;
     }
 }
 

@@ -23,8 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#ifdef _AFNETWORKING_
-
 #import "NNOAuth1Client.h"
 #import "NNReadLaterClient.h"
 
@@ -56,5 +54,3 @@ withCredential:(NNOAuthCredential *)credential
        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end
-
-#endif

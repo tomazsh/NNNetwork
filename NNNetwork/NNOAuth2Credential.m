@@ -1,5 +1,5 @@
 //
-//  NNPocketActivity.m
+//  NNOAuth2Credential.m
 //  NNNetwork
 //
 //  Copyright (c) 2012 Tomaz Nedeljko (http://nedeljko.com)
@@ -23,26 +23,36 @@
 //  THE SOFTWARE.
 //
 
-#import "NNPocketActivity.h"
+#import "NNOAuth2Credential.h"
 
-NSString * const NNActivityTypeSendToPocket = @"NNActivityTypeSendToPocket";
-
-@implementation NNPocketActivity
+@implementation NNOAuth2Credential
 
 #pragma mark -
-#pragma mark Properties
+#pragma mark NSCoding
 
-- (NNPocketClient *)client
+- (id)initWithCoder:(NSCoder *)decoder
 {
-    return [NNPocketClient sharedClient];
+    self = [super initWithCoder:decoder];
+    if (self) {
+        _tokenType = [decoder decodeObjectForKey:@"tokenType"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:_tokenType forKey:@"tokenType"];
 }
 
 #pragma mark -
-#pragma mark UIActivity
+#pragma mark NSCopying
 
-- (NSString *)activityType
+- (id)copyWithZone:(NSZone *)zone
 {
-    return NNActivityTypeSendToPocket;
+    NNOAuth2Credential *credential = (NNOAuth2Credential *)[super copyWithZone:zone];
+    credential.tokenType = [_tokenType copyWithZone:zone];
+    return credential;
 }
 
 @end

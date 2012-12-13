@@ -24,27 +24,106 @@
 //
 
 #import "NNPocketClient.h"
-
-#ifdef _AFNETWORKING_
-
-#import "NNOAuthCredential.h"
+#import "NNOAuth2Credential.h"
 
 NSString * const NNPocketClientName = @"Pocket";
-NSString * const NNPocketClientBaseString = @"https://readitlaterlist.com/v2/";
-NSString * const NNPocketClientAuthenticationPath = @"auth";
+NSString * const NNPocketClientOAuthWebAuthorizationBaseString = @"https://getpocket.com/auth/authorize";
+NSString * const NNPocketClientOAuthAppAuthorizationBaseString = @"pocket-oauth-v1:///authorize";
+NSString * const NNPocketClientBaseString = @"https://getpocket.com/v3/";
+NSString * const NNPocketClientOAuthRequestPath = @"oauth/request";
+NSString * const NNPocketClientOAuthAuthorizationPath = @"oauth/authorize";
 NSString * const NNPocketClientAddURLPath = @"add";
+
+typedef void(^AuthorizationSuccessBlock)(AFHTTPRequestOperation *, NSString *, NNOAuth2Credential *);
+typedef void(^AuthorizationFailureBlock)(AFHTTPRequestOperation *, NSError *);
+
+@interface NNPocketClient () {
+    @private
+    NSString *_code;
+    AuthorizationSuccessBlock _authorizationSuccessBlock;
+    AuthorizationFailureBlock _authorizationFailureBlock;
+}
+
+@property(copy, nonatomic) NSString *code;
+@property(copy, nonatomic) AuthorizationSuccessBlock authorizationSuccessBlock;
+@property(copy, nonatomic) AuthorizationFailureBlock authorizationFailureBlock;
+
+@end
 
 @implementation NNPocketClient
 
 #pragma mark -
 #pragma mark Public Methods
 
+- (void)authorizeWithSuccess:(void (^)(AFHTTPRequestOperation *, NSString *, NNOAuth2Credential *))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    NSURL *redirectURL = [self redirectURLFromScheme];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:self.clientIdentifier forKey:@"consumer_key"];
+    [parameters setValue:redirectURL forKey:@"redirect_uri"];
+    [self postPath:NNPocketClientOAuthRequestPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSString *responseType = [[operation.response allHeaderFields] valueForKey:@"Content-Type"];
+        if ([responseType isEqualToString:@"application/x-www-form-urlencoded"]) {
+            NSString *responseBody = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            responseObject = [NSDictionary dictionaryWithURLParameterString:responseBody];
+        }
+        
+        self.code = [responseObject valueForKey:@"code"];
+        self.authorizationSuccessBlock = success;
+        self.authorizationFailureBlock = failure;
+        
+        NSString *encodedRedirectURI = [[redirectURL absoluteString] stringByEncodingForURLQuery];
+        NSURL *authorizeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?request_token=%@&redirect_uri=%@", NNPocketClientOAuthAppAuthorizationBaseString, self.code, encodedRedirectURI]];
+        if (![[UIApplication sharedApplication] canOpenURL:authorizeURL]) {
+            authorizeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?request_token=%@&redirect_uri=%@", NNPocketClientOAuthWebAuthorizationBaseString, self.code, encodedRedirectURI]];
+        }
+        [[UIApplication sharedApplication] openURL:authorizeURL];
+    } failure:failure];
+}
+
+- (BOOL)handleRedirectionURL:(NSURL *)redirectionURL
+{
+    if (!self.code || ![[redirectionURL scheme] isEqualToString:self.scheme]) {
+        return NO;
+    }
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:self.clientIdentifier forKey:@"consumer_key"];
+    [parameters setValue:self.code forKey:@"code"];
+    [self postPath:NNPocketClientOAuthAuthorizationPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSString *responseType = [[operation.response allHeaderFields] valueForKey:@"Content-Type"];
+        if ([responseType isEqualToString:@"application/x-www-form-urlencoded"]) {
+            NSString *responseBody = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            responseObject = [NSDictionary dictionaryWithURLParameterString:responseBody];
+        }
+        
+        NSString *username = [responseObject valueForKey:@"username"];
+        NSString *accessToken = [responseObject valueForKey:@"access_token"];
+        NNOAuth2Credential *credential = [[NNOAuth2Credential alloc] initWithAccessToken:accessToken];
+        if (self.authorizationSuccessBlock) {
+            self.authorizationSuccessBlock(operation, username, credential);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (self.authorizationFailureBlock) {
+            self.authorizationFailureBlock(operation, error);
+        }
+    }];
+    
+    return YES;
+}
+
+- (NSURL *)redirectURLFromScheme
+{
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@:///authorizationFinished", self.scheme]];
+}
+
 - (void)addURL:(NSURL *)URL title:(NSString *)title withCredential:(NNOAuthCredential *)credential success:(void (^)(AFHTTPRequestOperation *operation))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *))failure
 {
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:5];
-    [parameters setValue:self.APIKey forKey:@"apikey"];
-    [parameters setValue:credential.accessToken forKey:@"username"];
-    [parameters setValue:credential.accessSecret forKey:@"password"];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:self.clientIdentifier forKey:@"consumer_key"];
+    [parameters setValue:credential.accessToken forKey:@"access_token"];
     [parameters setValue:URL forKey:@"url"];
     [parameters setValue:title forKey:@"title"];
     
@@ -77,29 +156,9 @@ NSString * const NNPocketClientAddURLPath = @"add";
     return NNPocketClientName;
 }
 
-- (void)credentialWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(AFHTTPRequestOperation *, NNOAuthCredential *))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
-{
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:3];
-    [parameters setValue:self.APIKey forKey:@"apikey"];
-    [parameters setValue:username forKey:@"username"];
-    [parameters setValue:password forKey:@"password"];
-    
-    [self postPath:NNPocketClientAuthenticationPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (success) {
-            success(operation, [NNOAuthCredential credentialWithAccessToken:username accessSecret:password]);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(operation, error);
-        }
-    }];
-}
-
 - (void)addURL:(NSURL *)URL withCredential:(NNOAuthCredential *)credential success:(void (^)(AFHTTPRequestOperation *))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     [self addURL:URL title:nil withCredential:credential success:success failure:failure];
 }
 
 @end
-
-#endif

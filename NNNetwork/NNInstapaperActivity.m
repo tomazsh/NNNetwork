@@ -25,8 +25,6 @@
 
 #import "NNInstapaperActivity.h"
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
-
 NSString * const NNActivityTypeSendToInstapaper = @"NNActivityTypeSendToInstapaper";
 
 @implementation NNInstapaperActivity
@@ -48,5 +46,3 @@ NSString * const NNActivityTypeSendToInstapaper = @"NNActivityTypeSendToInstapap
 }
 
 @end
-
-#endif

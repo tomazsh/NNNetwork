@@ -25,8 +25,6 @@
 
 #import "NNReadabilityActivity.h"
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
-
 NSString * const NNActivityTypeSendToReadability = @"NNActivityTypeSendToReadability";
 
 @implementation NNReadabilityActivity
@@ -48,5 +46,3 @@ NSString * const NNActivityTypeSendToReadability = @"NNActivityTypeSendToReadabi
 }
 
 @end
-
-#endif

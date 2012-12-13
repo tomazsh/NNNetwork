@@ -25,8 +25,6 @@
 
 #import "NNOAuthClient.h"
 
-#ifdef _AFNETWORKING_
-
 @implementation NNOAuthClient
 @synthesize clientIdentifier = _clientIdentifier;
 @synthesize clientSecret = _clientSecret;
@@ -130,5 +128,3 @@
 }
 
 @end
-
-#endif

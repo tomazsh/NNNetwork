@@ -23,16 +23,27 @@
 //  THE SOFTWARE.
 //
 
-#import <Availability.h>
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
-
 #import <UIKit/UIKit.h>
-#import "NNOAuth1Client.h"
+#import "NNOAuthClient.h"
 #import "NNReadLaterClient.h"
 
-typedef void(^NNReadLaterActivitySuccessBlock)(AFHTTPRequestOperation *, NSURL *);
-typedef void(^NNReadLaterActivityFailureBlock)(AFHTTPRequestOperation *, NSError *, NSURL *);
+@class NNReadLaterActivity, NNOAuthClient;
+
+@protocol NNReadLaterActivityDelegate <NSObject>
+
+@optional
+
+/**
+ If you do not implement this method in your delegate, activity will not be shown in activity view controller.
+ */
+- (void)readLaterActivityNeedsCredential:(NNReadLaterActivity *)activity;
+
+- (void)readLaterActivity:(NNReadLaterActivity *)activity
+         didFinishWithURL:(NSURL *)url
+                operation:(AFHTTPRequestOperation *)operation
+                    error:(NSError *)error;
+
+@end
 
 extern NSString * const NNReadLaterActivityType;
 
@@ -56,11 +67,9 @@ extern NSString * const NNReadLaterActivityType;
  */
 @interface NNReadLaterActivity : UIActivity {
     @private
-    NNOAuth1Client<NNReadLaterClient> *_client;
+    NNOAuthClient<NNReadLaterClient> *_client;
     NNOAuthCredential *_credential;
     NSMutableArray *_URLArray;
-    NNReadLaterActivitySuccessBlock _successBlock;
-    NNReadLaterActivityFailureBlock _failureBlock;
 }
 
 ///-----------------------------------------------
@@ -68,9 +77,14 @@ extern NSString * const NNReadLaterActivityType;
 ///-----------------------------------------------
 
 /**
+ Delegate for activity. Most conform to the `NNReadLaterActivityDelegate` protocol.
+ */
+@property(weak, nonatomic) id<NNReadLaterActivityDelegate> delegate;
+
+/**
  Read later client to display activity for.
  */
-@property(strong, readonly, nonatomic) NNOAuth1Client<NNReadLaterClient> *client;
+@property(strong, readonly, nonatomic) NNOAuthClient<NNReadLaterClient> *client;
 
 /**
  User credential for the user adding the URLs.
@@ -81,16 +95,6 @@ extern NSString * const NNReadLaterActivityType;
  URLs obtained by the activity for adding to reading list.
  */
 @property(strong, readonly, nonatomic) NSArray *URLArray;
-
-/**
- Block to be executed when an URL has been successfully added to the reading list. This block has no return type and takes two arguments: an `AFHTTPRequestOperation` object that initiated the request and an URL added to the reading list.
- */
-@property(copy, nonatomic) NNReadLaterActivitySuccessBlock successBlock;
-
-/**
- Block to be executed when adding an URL to the reading list has failed. This block has no return type and takes three arguments: an `AFHTTPRequestOperation` object that initiated the request, a `NSError` object describing the error occured and an URL added to the reading list.
- */
-@property(copy, nonatomic) NNReadLaterActivityFailureBlock failureBlock;
 
 ///-------------------------------------
 /// @name Creating Read Later Activities
@@ -106,5 +110,3 @@ extern NSString * const NNReadLaterActivityType;
 - (id)initWithCredential:(NNOAuthCredential *)credential;
 
 @end
-
-#endif

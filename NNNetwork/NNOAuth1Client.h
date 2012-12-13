@@ -23,8 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#ifdef _AFNETWORKING_
-
 #import "NNOAuthClient.h"
 
 /**
@@ -64,7 +62,7 @@
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes two arguments: the created request operation and the `NSError` object describing the network or parsing error that occurred.
  */
 - (void)temporaryCredentialWithPath:(NSString *)path
-                            success:(void (^)(AFHTTPRequestOperation *operation, NNOAuthCredential *temporaryCredential))success
+                            success:(void (^)(AFHTTPRequestOperation *operation, NNOAuth1Credential *temporaryCredential))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
@@ -79,7 +77,7 @@
 - (void)credentialWithPath:(NSString *)path
        temporaryCredential:(NNOAuthCredential *)temporaryCredential
                   verifier:(NSString *)verifier
-                   success:(void (^)(AFHTTPRequestOperation *operation, NNOAuthCredential *credential))success
+                   success:(void (^)(AFHTTPRequestOperation *operation, NNOAuth1Credential *credential))success
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
@@ -92,9 +90,7 @@
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes two arguments: the created request operation and the `NSError` object describing the network or parsing error that occurred.
  */
 - (void)credentialWithPath:(NSString *)path username:(NSString *)username password:(NSString *)password
-                    success:(void (^)(AFHTTPRequestOperation *operation, NNOAuthCredential *credential))success
+                    success:(void (^)(AFHTTPRequestOperation *operation, NNOAuth1Credential *credential))success
                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end
-
-#endif

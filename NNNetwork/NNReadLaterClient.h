@@ -36,6 +36,8 @@
 /// @name Accessing Read Later Client
 ///----------------------------------
 
+@required
+
 /**
  Returns the default shared read later client. It is recommended to always use this client, if you only need to work with one instance of the service.
  */
@@ -54,6 +56,8 @@
 /// @name Interacting with Read Later Service
 ///------------------------------------------
 
+@optional
+
 /**
  Sends a request to the read later service that obtains access credential for the user with specified username and password.
  
@@ -65,6 +69,8 @@
 - (void)credentialWithUsername:(NSString *)username password:(NSString *)password
                        success:(void (^)(AFHTTPRequestOperation *operation, NNOAuthCredential *credential))success
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+@required
 
 /**
  Sends a request to the read later service that adds an URL to the reading list of the user with the provided user credential.

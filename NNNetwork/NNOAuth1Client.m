@@ -24,10 +24,7 @@
 //
 
 #import "NNOAuth1Client.h"
-
-#ifdef _AFNETWORKING_
-
-#import "NNOAuthCredential.h"
+#import "NNOAuth1Credential.h"
 #import "NSString+NNNetwork.h"
 #import "NSData+NNNetwork.h"
 #import "NSDictionary+NNNetwork.h"
@@ -38,7 +35,7 @@
 #pragma mark -
 #pragma mark NNOAuthClient
 
-- (void)signRequest:(NSMutableURLRequest *)request withParameters:(NSDictionary *)parameters credential:(NNOAuthCredential *)credential
+- (void)signRequest:(NSMutableURLRequest *)request withParameters:(NSDictionary *)parameters credential:(NNOAuth1Credential *)credential
 {
     [request signForOAuth1WithClientIdentifier:self.clientIdentifier clientSecret:self.clientSecret accessToken:credential.accessToken accessSecret:credential.accessSecret signingMethod:self.signingMethod privateKey:self.privateKey parameters:parameters];
 }
@@ -47,24 +44,24 @@
 #pragma mark Authentication
 
 - (void)temporaryCredentialWithPath:(NSString *)path
-                            success:(void (^)(AFHTTPRequestOperation *operation, NNOAuthCredential *temporaryCredential))success
+                            success:(void (^)(AFHTTPRequestOperation *operation, NNOAuth1Credential *temporaryCredential))success
                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {    
-    [self signedPostPath:path parameters:nil credential:[NNOAuthCredential credentialWithAccessToken:@"" accessSecret:@""] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self signedPostPath:path parameters:nil credential:[NNOAuth1Credential credentialWithAccessToken:@"" accessSecret:@""] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *responseBody = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSDictionary *responseDictionary = [NSDictionary dictionaryWithURLParameterString:responseBody];
         NSString *requestToken = [responseDictionary valueForKey:@"oauth_token"];
         NSString *requestSecret = [responseDictionary valueForKey:@"oauth_token_secret"];
         if (success) {
-            success(operation, [NNOAuthCredential credentialWithAccessToken:requestToken accessSecret:requestSecret]);
+            success(operation, [NNOAuth1Credential credentialWithAccessToken:requestToken accessSecret:requestSecret]);
         }
     } failure:failure];
 }
 
 - (void)credentialWithPath:(NSString *)path
-       temporaryCredential:(NNOAuthCredential *)temporaryCredential
+       temporaryCredential:(NNOAuth1Credential *)temporaryCredential
                   verifier:(NSString *)verifier
-                   success:(void (^)(AFHTTPRequestOperation *operation, NNOAuthCredential *credential))success
+                   success:(void (^)(AFHTTPRequestOperation *operation, NNOAuth1Credential *credential))success
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     [self signedPostPath:path parameters:[NSDictionary dictionaryWithObject:verifier forKey:@"oauth_verifier"] credential:temporaryCredential success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -73,30 +70,28 @@
         NSString *accessToken = [responseDictionary valueForKey:@"oauth_token"];
         NSString *accessSecret = [responseDictionary valueForKey:@"oauth_token_secret"];
         if (success) {
-            success(operation, [NNOAuthCredential credentialWithAccessToken:accessToken accessSecret:accessSecret]);
+            success(operation, [NNOAuth1Credential credentialWithAccessToken:accessToken accessSecret:accessSecret]);
         }
     } failure:failure];
 }
 
 - (void)credentialWithPath:(NSString *)path username:(NSString *)username password:(NSString *)password
-                   success:(void (^)(AFHTTPRequestOperation *operation, NNOAuthCredential *credential))success
+                   success:(void (^)(AFHTTPRequestOperation *operation, NNOAuth1Credential *credential))success
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                 username, @"x_auth_username",
                                 password, @"x_auth_password",
                                 @"client_auth", @"x_auth_mode", nil];
-    [self signedPostPath:path parameters:parameters credential:[NNOAuthCredential emptyCredential] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self signedPostPath:path parameters:parameters credential:[NNOAuth1Credential emptyCredential] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
             NSString *responseBody = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             NSDictionary *responseDictionary = [NSDictionary dictionaryWithURLParameterString:responseBody];
             NSString *accessToken = [responseDictionary valueForKey:@"oauth_token"];
             NSString *accessSecret = [responseDictionary valueForKey:@"oauth_token_secret"];
-            success(operation, [NNOAuthCredential credentialWithAccessToken:accessToken accessSecret:accessSecret]);
+            success(operation, [NNOAuth1Credential credentialWithAccessToken:accessToken accessSecret:accessSecret]);
         }
     } failure:failure];
 }
 
 @end
-
-#endif

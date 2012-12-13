@@ -29,32 +29,27 @@
 @interface NNOAuthCredential ()
 
 @property(copy, readwrite, nonatomic) NSString *accessToken;
-@property(copy, readwrite, nonatomic) NSString *accessSecret;
 
 @end
 
 @implementation NNOAuthCredential
-@synthesize accessToken = _accessToken;
-@synthesize accessSecret = _accessSecret;
-@synthesize refreshToken = _refreshToken;
-@synthesize expirationDate = _expirationDate;
 
 #pragma mark -
 #pragma mark Class Methods
 
 + (id)emptyCredential
 {
-    return [[self alloc] initWithAccessToken:@"" accessSecret:@""];
+    return [[self alloc] initWithAccessToken:@""];
 }
 
-+ (id)credentialWithAccessToken:(NSString *)token accessSecret:(NSString *)secret
++ (id)credentialWithAccessToken:(NSString *)token
 {
-    return [[self alloc] initWithAccessToken:token accessSecret:secret userInfo:nil];
+    return [[self alloc] initWithAccessToken:token userInfo:nil];
 }
 
-+ (id)credentialWithAccessToken:(NSString *)token accessSecret:(NSString *)secret userInfo:(NSDictionary *)userInfo
++ (id)credentialWithAccessToken:(NSString *)token userInfo:(NSDictionary *)userInfo
 {
-    return [[self alloc] initWithAccessToken:token accessSecret:secret userInfo:userInfo];
+    return [[self alloc] initWithAccessToken:token userInfo:userInfo];
 }
 
 + (id)credentialFromKeychainForService:(NSString *)service account:(NSString *)account
@@ -66,17 +61,16 @@
 #pragma mark -
 #pragma mark Initialization
 
-- (id)initWithAccessToken:(NSString *)token accessSecret:(NSString *)secret
+- (id)initWithAccessToken:(NSString *)token
 {
-    return [self initWithAccessToken:token accessSecret:secret userInfo:nil];
+    return [self initWithAccessToken:token userInfo:nil];
 }
 
-- (id)initWithAccessToken:(NSString *)token accessSecret:(NSString *)secret userInfo:(NSDictionary *)userInfo
+- (id)initWithAccessToken:(NSString *)token userInfo:(NSDictionary *)userInfo
 {
     self = [super init];
     if (self) {
         _accessToken = [token copy];
-        _accessSecret = [secret copy];
         _userInfo = [userInfo copy];
     }
     return self;
@@ -111,7 +105,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@ accessToken:\"%@\" accessSecret:\"%@\" refreshToken:\"%@\" expirationDate:\"%@\">", [self class], self.accessToken, self.accessSecret, self.refreshToken, self.expirationDate];
+    return [NSString stringWithFormat:@"<%@ accessToken:\"%@\" refreshToken:\"%@\" expirationDate:\"%@\">", [self class], self.accessToken, self.refreshToken, self.expirationDate];
 }
 
 #pragma mark -
@@ -122,7 +116,6 @@
     self = [super init];
     if (self) {
         _accessToken = [decoder decodeObjectForKey:@"accessToken"];
-        _accessSecret = [decoder decodeObjectForKey:@"accessSecret"];
         _refreshToken = [decoder decodeObjectForKey:@"refreshToken"];
         _expirationDate = [decoder decodeObjectForKey:@"expirationDate"];
         _userInfo = [decoder decodeObjectForKey:@"userInfo"];
@@ -133,7 +126,6 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:_accessToken forKey:@"accessToken"];
-    [encoder encodeObject:_accessSecret forKey:@"accessSecret"];
     [encoder encodeObject:_refreshToken forKey:@"refreshToken"];
     [encoder encodeObject:_expirationDate forKey:@"expirationDate"];
     [encoder encodeObject:_userInfo forKey:@"userInfo"];
@@ -144,7 +136,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    NNOAuthCredential *credential = [[NNOAuthCredential allocWithZone:zone] initWithAccessToken:self.accessToken accessSecret:self.accessSecret userInfo:[self userInfo]];
+    NNOAuthCredential *credential = [[NNOAuthCredential allocWithZone:zone] initWithAccessToken:self.accessToken userInfo:[self userInfo]];
     credential.refreshToken = [_refreshToken copyWithZone:zone];
     credential.expirationDate = [_expirationDate copyWithZone:zone];
     return credential;

@@ -24,9 +24,6 @@
 //
 
 #import "NNReadLaterActivity.h"
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
-
 #import "NNOAuthCredential.h"
 
 NSString * const NNReadLaterActivityType = @"NNReadLaterActivityType";
@@ -66,7 +63,7 @@ NSString * const NNReadLaterActivityType = @"NNReadLaterActivityType";
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems
 {
-    if (!self.credential) {
+    if (!self.credential && ![self.delegate respondsToSelector:@selector(readLaterActivityNeedsCredential:)]) {
         return NO;
     }
     
@@ -89,14 +86,21 @@ NSString * const NNReadLaterActivityType = @"NNReadLaterActivityType";
 
 - (void)performActivity
 {
+    if (!self.credential && [self.delegate respondsToSelector:@selector(readLaterActivityNeedsCredential:)]) {
+        [self activityDidFinish:YES];
+        [self.delegate readLaterActivityNeedsCredential:self];
+        return;
+    }
+    
     for (NSURL *URL in self.URLArray) {
+        NNReadLaterActivity *activity = self;
         [self.client addURL:URL withCredential:self.credential success:^(AFHTTPRequestOperation *operation) {
-            if (self.successBlock) {
-                self.successBlock(operation, URL);
+            if ([activity.delegate respondsToSelector:@selector(readLaterActivity:didFinishWithURL:operation:error:)]) {
+                [activity.delegate readLaterActivity:activity didFinishWithURL:URL operation:operation error:nil];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (self.failureBlock) {
-                self.failureBlock(operation, error, URL);
+            if ([activity.delegate respondsToSelector:@selector(readLaterActivity:didFinishWithURL:operation:error:)]) {
+                [activity.delegate readLaterActivity:activity didFinishWithURL:URL operation:operation error:error];
             }
         }];
     }
@@ -104,5 +108,3 @@ NSString * const NNReadLaterActivityType = @"NNReadLaterActivityType";
 }
 
 @end
-
-#endif

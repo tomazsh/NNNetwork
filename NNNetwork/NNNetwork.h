@@ -23,11 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#import <Availability.h>
-
-#ifndef _NNNETWORK_H
-#define _NNNETWORK_H
-
 #import "NSString+NNNetwork.h"
 #import "NSData+NNNetwork.h"
 #import "NSDictionary+NNNetwork.h"
@@ -35,22 +30,15 @@
 #import "NSMutableURLRequest+NNNetwork.h"
 #import "NNOAuth.h"
 #import "NNOAuthCredential.h"
-
-#ifdef _AFNETWORKING_
+#import "NNOAuth1Credential.h"
+#import "NNOAuth2Credential.h"
 #import "NNOAuthClient.h"
 #import "NNOAuth1Client.h"
 #import "NNReadLaterClient.h"
 #import "NNInstapaperClient.h"
 #import "NNPocketClient.h"
 #import "NNReadabilityClient.h"
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import "NNReadLaterActivity.h"
 #import "NNInstapaperActivity.h"
 #import "NNPocketActivity.h"
 #import "NNReadabilityActivity.h"
-#endif
-
-#endif
-
-#endif
