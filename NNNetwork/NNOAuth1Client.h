@@ -24,6 +24,7 @@
 //
 
 #import "NNOAuthClient.h"
+#import "NNOAuth1Credential.h"
 
 /**
  `NNOAuth1Client` provides a way to communicate with an OAuth 1.0 service. It provides methods for both, a redirection-based and XAuth authorization. It also subclasses `NNOAuthClient` to implement a signing mechanism. For this, it uses the `signForOAuthWithClientIdentifier:clientSecret:method:parameters:credential:` method of `NSMutableURLRequest(NNNetwork)` category.

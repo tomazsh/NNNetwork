@@ -25,6 +25,10 @@
 
 #import "NNPocketClient.h"
 #import "NNOAuth2Credential.h"
+#import "NNOAuthCredential.h"
+#import "AFHTTPRequestOperation.h"
+#import "NSDictionary+NNNetwork.h"
+#import "NSString+NNNetwork.h"
 
 NSString * const NNPocketClientName = @"Pocket";
 NSString * const NNPocketClientOAuthWebAuthorizationBaseString = @"https://getpocket.com/auth/authorize";
