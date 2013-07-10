@@ -25,6 +25,8 @@
 
 #import "NNOAuth2Client.h"
 #import "NNOAuth2Credential.h"
+#import "AFHTTPRequestOperation.h"
+#import "NSDictionary+NNNetwork.h"
 
 @implementation NNOAuth2Client
 
