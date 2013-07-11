@@ -25,7 +25,6 @@
 
 #import "NNPocketClient.h"
 #import "NNOAuth2Credential.h"
-#import "NNOAuthCredential.h"
 #import "AFHTTPRequestOperation.h"
 #import "NSDictionary+NNNetwork.h"
 #import "NSString+NNNetwork.h"

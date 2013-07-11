@@ -24,7 +24,7 @@
 //
 
 #import "NNInstapaperClient.h"
-#import "NNOAuthCredential.h"
+#import "NNOAuth1Credential.h"
 
 NSString * const NNInstapaperClientName = @"Instapaper";
 NSString * const NNInstapaperClientBaseString = @"https://www.instapaper.com/api/1/";

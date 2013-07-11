@@ -24,7 +24,7 @@
 //
 
 #import "NNReadabilityClient.h"
-#import "NNOAuthCredential.h"
+#import "NNOAuth1Credential.h"
 
 NSString * const NNReadabilityClientName = @"Readability";
 NSString * const NNReadabilityClientBaseString = @"https://www.readability.com/api/rest/v1/";
