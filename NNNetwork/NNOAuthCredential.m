@@ -54,7 +54,14 @@
 
 + (id)credentialFromKeychainForService:(NSString *)service account:(NSString *)account
 {
-    NSData *data = [SSKeychain passwordDataForService:service account:account];
+    SSKeychainQuery *keychainQuery = [[SSKeychainQuery alloc] init];
+    keychainQuery.service = service;
+    keychainQuery.account = account;
+    
+    NSError *error;
+    NSData *data;
+    [keychainQuery fetch:&error];
+    error ? data = keychainQuery.passwordData : nil;
     return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
 }
 
@@ -92,7 +99,11 @@
 - (void)saveToKeychainForService:(NSString *)service account:(NSString *)account
 {
     NSData *credentialData = [NSKeyedArchiver archivedDataWithRootObject:self];
-    [SSKeychain setPasswordData:credentialData forService:service account:account];
+    SSKeychainQuery *keychainQuery = [[SSKeychainQuery alloc] init];
+    keychainQuery.service = service;
+    keychainQuery.account = account;
+    keychainQuery.passwordData = credentialData;
+    [keychainQuery save:nil];
 }
 
 - (void)removeFromKeychainForService:(NSString *)service account:(NSString *)account
