@@ -61,7 +61,7 @@
     NSError *error;
     NSData *data;
     [keychainQuery fetch:&error];
-    error ? data = keychainQuery.passwordData : nil;
+    !error ? data = keychainQuery.passwordData : nil;
     return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
 }
 
