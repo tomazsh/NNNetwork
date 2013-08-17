@@ -59,10 +59,8 @@
     keychainQuery.account = account;
     
     NSError *error;
-    NSData *data;
     [keychainQuery fetch:&error];
-    !error ? data = keychainQuery.passwordData : nil;
-    return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
+    return !error ? [NSKeyedUnarchiver unarchiveObjectWithData:keychainQuery.passwordData] : nil;
 }
 
 #pragma mark -
