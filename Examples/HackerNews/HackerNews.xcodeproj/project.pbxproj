@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2481933417BFAB0700FB3EC8 /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2481932C17BFAAF000FB3EC8 /* SSKeychain.strings */; };
+		2481933517BFAB0C00FB3EC8 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2481933117BFAAF000FB3EC8 /* SSKeychain.m */; };
+		2481933617BFAB0C00FB3EC8 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2481933317BFAAF000FB3EC8 /* SSKeychainQuery.m */; };
 		732EF5F1162D670600F766E3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 732EF5F0162D670600F766E3 /* UIKit.framework */; };
 		732EF5F3162D670600F766E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 732EF5F2162D670600F766E3 /* Foundation.framework */; };
 		732EF5F5162D670600F766E3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 732EF5F4162D670600F766E3 /* CoreGraphics.framework */; };
@@ -54,7 +57,6 @@
 		73BB6BAA16354A8D0008536B /* NSString+NNNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BB6B9B16354A8D0008536B /* NSString+NNNetwork.m */; };
 		73BB6BB9163551780008536B /* NSURLRequest+NNNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BB6BB8163551780008536B /* NSURLRequest+NNNetwork.m */; };
 		73BB6BBC163551F00008536B /* NNOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BB6BBB163551F00008536B /* NNOAuth.m */; };
-		73BB6C621635EE820008536B /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BB6C611635EE820008536B /* SSKeychain.m */; };
 		73BB6C771635EE950008536B /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BB6C651635EE950008536B /* AFHTTPClient.m */; };
 		73BB6C781635EE950008536B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BB6C671635EE950008536B /* AFHTTPRequestOperation.m */; };
 		73BB6C791635EE950008536B /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BB6C691635EE950008536B /* AFImageRequestOperation.m */; };
@@ -67,6 +69,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2481932D17BFAAF000FB3EC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = SSKeychain.strings; sourceTree = "<group>"; };
+		2481933017BFAAF000FB3EC8 /* SSKeychain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = ../../Vendor/SSKeychain/SSKeychain/SSKeychain.h; sourceTree = "<group>"; };
+		2481933117BFAAF000FB3EC8 /* SSKeychain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = ../../Vendor/SSKeychain/SSKeychain/SSKeychain.m; sourceTree = "<group>"; };
+		2481933217BFAAF000FB3EC8 /* SSKeychainQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SSKeychainQuery.h; path = ../../Vendor/SSKeychain/SSKeychain/SSKeychainQuery.h; sourceTree = "<group>"; };
+		2481933317BFAAF000FB3EC8 /* SSKeychainQuery.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SSKeychainQuery.m; path = ../../Vendor/SSKeychain/SSKeychain/SSKeychainQuery.m; sourceTree = "<group>"; };
 		732EF5EC162D670500F766E3 /* Hacker News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hacker News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		732EF5F0162D670600F766E3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		732EF5F2162D670600F766E3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -143,8 +150,6 @@
 		73BB6BB8163551780008536B /* NSURLRequest+NNNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURLRequest+NNNetwork.m"; path = "../../NNNetwork/NSURLRequest+NNNetwork.m"; sourceTree = "<group>"; };
 		73BB6BBA163551F00008536B /* NNOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NNOAuth.h; path = ../../NNNetwork/NNOAuth.h; sourceTree = "<group>"; };
 		73BB6BBB163551F00008536B /* NNOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NNOAuth.m; path = ../../NNNetwork/NNOAuth.m; sourceTree = "<group>"; };
-		73BB6C601635EE820008536B /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSKeychain.h; path = ../../Vendor/SSKeychain/SSKeychain.h; sourceTree = "<group>"; };
-		73BB6C611635EE820008536B /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSKeychain.m; path = ../../Vendor/SSKeychain/SSKeychain.m; sourceTree = "<group>"; };
 		73BB6C641635EE950008536B /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = ../../Vendor/AFNetworking/AFNetworking/AFHTTPClient.h; sourceTree = "<group>"; };
 		73BB6C651635EE950008536B /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = ../../Vendor/AFNetworking/AFNetworking/AFHTTPClient.m; sourceTree = "<group>"; };
 		73BB6C661635EE950008536B /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = ../../Vendor/AFNetworking/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -183,6 +188,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2481932B17BFAAF000FB3EC8 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				2481932C17BFAAF000FB3EC8 /* SSKeychain.strings */,
+			);
+			name = en.lproj;
+			path = ../../Vendor/SSKeychain/SSKeychain/en.lproj;
+			sourceTree = "<group>";
+		};
 		732EF5E1162D670500F766E3 = {
 			isa = PBXGroup;
 			children = (
@@ -295,8 +309,11 @@
 		735F7363162F1E1500AEFFBF /* SSKeychain */ = {
 			isa = PBXGroup;
 			children = (
-				73BB6C601635EE820008536B /* SSKeychain.h */,
-				73BB6C611635EE820008536B /* SSKeychain.m */,
+				2481932B17BFAAF000FB3EC8 /* en.lproj */,
+				2481933017BFAAF000FB3EC8 /* SSKeychain.h */,
+				2481933117BFAAF000FB3EC8 /* SSKeychain.m */,
+				2481933217BFAAF000FB3EC8 /* SSKeychainQuery.h */,
+				2481933317BFAAF000FB3EC8 /* SSKeychainQuery.m */,
 			);
 			name = SSKeychain;
 			sourceTree = "<group>";
@@ -434,6 +451,7 @@
 				73BB6B7916354A710008536B /* NNReadabilityActivity@2x~iphone.png in Resources */,
 				73BB6B7A16354A710008536B /* NNReadabilityActivity~ipad.png in Resources */,
 				73BB6B7B16354A710008536B /* NNReadabilityActivity~iphone.png in Resources */,
+				2481933417BFAB0700FB3EC8 /* SSKeychain.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +484,6 @@
 				73BB6BAA16354A8D0008536B /* NSString+NNNetwork.m in Sources */,
 				73BB6BB9163551780008536B /* NSURLRequest+NNNetwork.m in Sources */,
 				73BB6BBC163551F00008536B /* NNOAuth.m in Sources */,
-				73BB6C621635EE820008536B /* SSKeychain.m in Sources */,
 				73BB6C771635EE950008536B /* AFHTTPClient.m in Sources */,
 				73BB6C781635EE950008536B /* AFHTTPRequestOperation.m in Sources */,
 				73BB6C791635EE950008536B /* AFImageRequestOperation.m in Sources */,
@@ -479,10 +496,23 @@
 				735E6419167A991300CA10BD /* NNOAuth2Client.m in Sources */,
 				735E6423167A997300CA10BD /* NNOAuth1Credential.m in Sources */,
 				735E6425167A997600CA10BD /* NNOAuth2Credential.m in Sources */,
+				2481933517BFAB0C00FB3EC8 /* SSKeychain.m in Sources */,
+				2481933617BFAB0C00FB3EC8 /* SSKeychainQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2481932C17BFAAF000FB3EC8 /* SSKeychain.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2481932D17BFAAF000FB3EC8 /* en */,
+			);
+			name = SSKeychain.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		732EF608162D670600F766E3 /* Debug */ = {
